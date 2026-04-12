@@ -1,4 +1,3 @@
-cat > variables.tf << 'EOF'
 variable "aws_region" {
   description = "AWS region"
   type        = string
