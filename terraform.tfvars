@@ -1,4 +1,4 @@
-cat > terraform.tfvars << 'EOF'
+ 
 aws_region              = "us-east-1"
 project_name            = "myapp"
 vpc_cidr                = "10.0.0.0/16"
@@ -12,4 +12,4 @@ ssh_cidr                = "0.0.0.0/0"
 asg_min_size            = 2
 asg_max_size            = 4
 asg_desired_capacity    = 2
-EOF
+ 
