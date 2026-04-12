@@ -1,5 +1,3 @@
-# File: .github/workflows/terraform-apply.yml
-cat > .github/workflows/terraform-apply.yml << 'EOF'
 name: Terraform Apply
 
 on:
@@ -10,18 +8,20 @@ on:
 jobs:
   apply:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
       
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.0
 
@@ -38,9 +38,6 @@ jobs:
 
       - name: Deployment Summary
         run: |
-          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY'
-          ## 🚀 Terraform Deployed Successfully
-          - **ALB URL**: ${{ steps.outputs.outputs.alb_url }}
-          - **Status**: ✅ Complete
-          SUMMARY
-EOF
+          echo "## 🚀 Terraform Deployed Successfully" >> $GITHUB_STEP_SUMMARY
+          echo "- ALB URL: ${{ steps.outputs.outputs.alb_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ✅ Complete" >> $GITHUB_STEP_SUMMARY
