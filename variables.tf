@@ -1,47 +1,15 @@
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
+output "vpc_id" {
+  value = aws_vpc.main.id
 }
 
-variable "project_name" {
-  description = "Project name"
-  type        = string
-  default     = "myapp"
+output "instance_public_ip" {
+  value = aws_instance.app_server.public_ip
 }
 
-variable "vpc_cidr" {
-  description = "VPC CIDR block"
-  type        = string
-  default     = "10.0.0.0/16"
+output "alb_dns_name" {
+  value = aws_lb.main.dns_name
 }
 
-variable "public_subnet_1_cidr" {
-  description = "Public subnet 1 CIDR block"
-  type        = string
-  default     = "10.0.1.0/24"
-}
-
-variable "public_subnet_2_cidr" {
-  description = "Public subnet 2 CIDR block"
-  type        = string
-  default     = "10.0.2.0/24"
-}
-
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
-  default     = "t2.micro"
-}
-
-variable "app_port" {
-  description = "Application port"
-  type        = number
-  default     = 80
-}
-
-variable "ssh_cidr" {
-  description = "CIDR block for SSH"
-  type        = string
-  default     = "0.0.0.0/0"
+output "application_url" {
+  value = "http://${aws_lb.main.dns_name}"
 }
